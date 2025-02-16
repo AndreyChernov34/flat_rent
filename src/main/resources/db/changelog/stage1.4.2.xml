@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.4.xsd">
+    <changeSet id="2" author="AndreyChernov">
+        <createTable tableName="advert">
+            <column name="id" type="serial">
+                <constraints primaryKey="true" primaryKeyName="advert_id_pk" />
+            </column>
+            <column name="price" type="numeric(10,2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="isActive" type="boolean">
+                <constraints nullable="false"/>
+            </column>
+            <column name="idApartment" type="integer">
+                <constraints foreignKeyName="fk_apartment_id" referencedTableName="apartment" referencedColumnNames="id"/>
+            </column>
+            <column name="description" type="text">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>
+    
