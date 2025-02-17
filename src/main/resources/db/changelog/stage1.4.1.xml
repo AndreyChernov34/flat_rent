@@ -18,7 +18,7 @@
             <column name="house" type="varchar(100)">
                 <constraints nullable="false"/>
             </column>
-            <column name="room" type ="integer">
+            <column name="room" type ="varchar(100)">
                 <constraints nullable="false"/>
             </column>
         </createTable>
