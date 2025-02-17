@@ -1,9 +1,3 @@
 databaseChangelog:
   - include:
-    file: db/changelog/stage1.4.1.xml
-  - include:
-    file: db/changelog/stage1.4.2.xml
-  - include:
-    file: db/changelog/stage1.4.3.xml
-  - include:
-    file: db/changelog/stage1.4.4.xml
+    file: db/changelog/stage1.4.xml
