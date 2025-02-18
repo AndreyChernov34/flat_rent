@@ -4,7 +4,7 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
         https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.4.xsd">
-    <changeSet id="1" author="Andrey Chernov">
+    <changeSet id="20250218-1" author="Andrey Chernov">
         <createTable tableName="apartment">
             <column name="id" type="serial">
                 <constraints primaryKey="true" primaryKeyName="apartment_id_pk"/>
