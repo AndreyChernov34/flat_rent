@@ -5,7 +5,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -16,7 +15,6 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "booking")
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -28,17 +26,17 @@ public class Booking {
     private Integer id;
 
     @Column(name = "start_date", nullable = false)
-    private LocalDateTime startDateBooking;
+    private LocalDateTime startDate;
 
     @Column(name = "end_date", nullable = false)
-    private LocalDateTime endDateBooking;
+    private LocalDateTime endDate;
 
-    @Column(name = "id_name", nullable = false)
+    @Column(name = "name_id", nullable = false)
     private Integer idClient;
 
-    @Column(name = "id_advert", nullable = false)
+    @Column(name = "advert_id", nullable = false)
     private Integer idAdvert;
 
     @Column(name = "amount", nullable = false)
-    private BigDecimal amountBooking;
+    private BigDecimal amount;
 }
