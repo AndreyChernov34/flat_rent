@@ -7,7 +7,6 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -15,7 +14,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name ="apartment")
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -36,6 +34,6 @@ public class Apartment {
     private String house;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "room", nullable = false)
-    private RoomType roomType;
+    @Column(name = "type", nullable = false)
+    private ApartmentType apartmentType;
 }

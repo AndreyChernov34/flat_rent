@@ -5,7 +5,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -15,7 +14,6 @@ import lombok.Setter;
 import java.math.BigDecimal;
 
 @Entity
-@Table(name = "advert")
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -32,7 +30,7 @@ public class Advert {
     @Column(name = "is_active", nullable = false)
     private Boolean isActive;
 
-    @Column(name = "id_apartment", nullable = false)
+    @Column(name = "apartment_id", nullable = false)
     private Integer idApartment;
 
     @Column(nullable = false)
