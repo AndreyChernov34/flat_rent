@@ -6,4 +6,4 @@ spring:
     driver: org.postgresql.Driver
   jpa:
     hibernate:
-      ddl-auto: none
+      ddl-auto: update

@@ -6,11 +6,11 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -27,19 +27,20 @@ import java.util.List;
 @Getter
 @Setter
 @ToString
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Advert {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-
+    @EqualsAndHashCode.Include
     @Column(nullable = false)
     private BigDecimal price;
 
     @Column(name = "is_active", nullable = false)
     private Boolean isActive;
 
+    @ToStringExclude
     @ManyToOne()
-    @Column(name = "apartment_id", nullable = false)
+    @JoinColumn(name = "apartment_id", nullable = false)
     private Apartment apartment;
 
     @Column(nullable = false)
