@@ -5,16 +5,21 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -31,11 +36,13 @@ public class Booking {
     @Column(name = "end_date", nullable = false)
     private LocalDateTime endDate;
 
-    @Column(name = "name_id", nullable = false)
-    private Integer idClient;
+    @ManyToOne
+    @Column(name = "client_id", nullable = false)
+    private Client client;
 
+    @ManyToOne
     @Column(name = "advert_id", nullable = false)
-    private Integer idAdvert;
+    private Advert advert;
 
     @Column(name = "amount", nullable = false)
     private BigDecimal amount;
