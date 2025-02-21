@@ -1,8 +1,9 @@
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/flat_rent
-    username: admin
+    username: postgres
     password: 12345
     driver: org.postgresql.Driver
-
-
+  jpa:
+    hibernate:
+      ddl-auto: none
