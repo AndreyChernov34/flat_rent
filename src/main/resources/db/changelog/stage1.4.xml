@@ -9,16 +9,16 @@
             <column name="id" type="serial">
                 <constraints primaryKey="true" primaryKeyName="apartment_id_pk"/>
             </column>
-            <column name="city" type="varchar(255)">
+            <column name="city" type="varchar(100)">
                 <constraints nullable="false"/>
             </column>
-            <column name="street" type="varchar(255)">
+            <column name="street" type="varchar(100)">
                 <constraints nullable="false"/>
             </column>
-            <column name="house" type="varchar(255)">
+            <column name="house" type="varchar(100)">
                 <constraints nullable="false"/>
             </column>
-            <column name="type" type="varchar(255)">
+            <column name="room" type="varchar(100)">
                 <constraints nullable="false"/>
             </column>
         </createTable>
@@ -33,7 +33,7 @@
             <column name="is_active" type="boolean">
                 <constraints nullable="false"/>
             </column>
-            <column name="apartment_id" type="integer">
+            <column name="id_apartment" type="integer">
                 <constraints foreignKeyName="fk_apartment_id" referencedTableName="apartment"
                              referencedColumnNames="id"/>
             </column>
@@ -46,10 +46,10 @@
             <column name="id" type="serial">
                 <constraints primaryKey="true" primaryKeyName="client_id_pk"/>
             </column>
-            <column name="name" type="varchar(255)">
+            <column name="name" type="varchar(250)">
                 <constraints nullable="false"/>
             </column>
-            <column name="email" type="varchar(255)">
+            <column name="email" type="varchar(100)">
                 <constraints nullable="false" unique="true" uniqueConstraintName="email_unique"/>
             </column>
         </createTable>
@@ -64,10 +64,10 @@
             <column name="end_date" type="timestamp">
                 <constraints nullable="false"/>
             </column>
-            <column name="client_id" type="integer">
+            <column name="id_client" type="integer">
                 <constraints foreignKeyName="fk_client_id" referencedTableName="client" referencedColumnNames="id"/>
             </column>
-            <column name="advert_id" type="integer">
+            <column name="id_advert" type="integer">
                 <constraints foreignKeyName="fk_advert_id" referencedTableName="advert" referencedColumnNames="id"/>
             </column>
             <column name="amount" type="numeric(10,2)">
