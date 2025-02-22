@@ -42,7 +42,7 @@ public class Advert {
     private Boolean isActive;
 
     @ToStringExclude
-    @ManyToOne()
+    @ManyToOne
     @JoinColumn(name = "apartment_id", nullable = false)
     private Apartment apartment;
 
