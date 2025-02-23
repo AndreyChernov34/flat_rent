@@ -6,7 +6,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @Getter
 public enum ApartmentType {
-    ROOM("комната"),
+    ONLY_ROOM("комната"),
     ONE_ROOM_FLAT("однокомнатная квартира"),
     TWO_ROOM_FLAT("двухкомнатная квартира"),
     THREE_ROOM_FLAT("трехкомнатная квартира"),
