@@ -1,22 +1,14 @@
 package com.javaacademy.org.flat_rent.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.javaacademy.org.flat_rent.entity.Advert;
-import com.javaacademy.org.flat_rent.entity.Client;
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import lombok.Builder;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
-import org.apache.commons.lang3.builder.ToStringExclude;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Data
+@Builder
 public class BookingDto {
     private Integer id;
     @JsonProperty("date_start")

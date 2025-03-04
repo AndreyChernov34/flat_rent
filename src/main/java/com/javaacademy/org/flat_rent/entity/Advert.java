@@ -16,7 +16,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import org.apache.commons.lang3.builder.ToStringExclude;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -41,7 +40,6 @@ public class Advert {
     @Column(name = "is_active", nullable = false)
     private Boolean isActive;
 
-    @ToStringExclude
     @ManyToOne
     @JoinColumn(name = "apartment_id", nullable = false)
     private Apartment apartment;
@@ -49,7 +47,7 @@ public class Advert {
     @Column(nullable = false)
     private String description;
 
-    @ToStringExclude
+    @ToString.Exclude
     @OneToMany(mappedBy = "advert", fetch = FetchType.EAGER)
     private List<Booking> bookingList;
 }

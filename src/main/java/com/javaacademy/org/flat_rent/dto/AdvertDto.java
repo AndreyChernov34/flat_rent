@@ -1,11 +1,13 @@
 package com.javaacademy.org.flat_rent.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Builder;
 import lombok.Data;
 
 import java.math.BigDecimal;
 
 @Data
+@Builder
 public class AdvertDto {
     private Integer id;
     private BigDecimal price;
