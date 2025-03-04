@@ -1,7 +1,7 @@
 package com.javaacademy.org.flat_rent.service;
 
 import com.javaacademy.org.flat_rent.dto.BookingDto;
-import com.javaacademy.org.flat_rent.dto.BookingResponseDto;
+import com.javaacademy.org.flat_rent.dto.BookingDtoRs;
 import com.javaacademy.org.flat_rent.entity.Booking;
 import com.javaacademy.org.flat_rent.mapper.BookingMapper;
 import com.javaacademy.org.flat_rent.repository.AdvertRepository;
@@ -10,6 +10,9 @@ import com.javaacademy.org.flat_rent.repository.ClientRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.math.BigDecimal;
+import java.time.temporal.ChronoUnit;
 
 @Service
 @RequiredArgsConstructor
@@ -20,16 +23,20 @@ public class BookingService {
     private final ClientRepository clientRepository;
 
     @Transactional
-    public BookingResponseDto save(BookingDto bookingDto) {
-        if (!advertRepository.existsById(bookingDto.getAdvertId())) {
-            throw new RuntimeException("Объявление не найдено");
-        }
-        if (!clientRepository.existsById(bookingDto.getClientId())) {
-            throw new RuntimeException("Клиент не найден");
-        }
-        Booking booking = bookingMapper.toEntityWithRelation(bookingDto);
+    public BookingDtoRs save(BookingDto bookingDto) {
 
-        return bookingMapper.toResponseDto(bookingRepository.save(booking));
+        Booking booking = bookingMapper.toEntityWithRelation(bookingDto);
+        booking.setAmount(calculateResultPrice(booking));
+
+        return bookingMapper.toDtoRs(bookingRepository.save(booking));
+    }
+
+    private BigDecimal calculateResultPrice(Booking booking) {
+
+        return booking.getAdvert().getPrice()
+                .multiply(BigDecimal.valueOf(
+                        ChronoUnit.DAYS.between(booking.getStartDate(), booking.getEndDate())));
+
     }
 
 }

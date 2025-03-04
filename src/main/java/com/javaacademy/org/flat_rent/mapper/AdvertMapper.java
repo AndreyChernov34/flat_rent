@@ -1,9 +1,10 @@
 package com.javaacademy.org.flat_rent.mapper;
 
 import com.javaacademy.org.flat_rent.dto.AdvertDto;
-import com.javaacademy.org.flat_rent.dto.AdvertResponseDto;
+import com.javaacademy.org.flat_rent.dto.AdvertDtoRs;
 import com.javaacademy.org.flat_rent.entity.Advert;
 import com.javaacademy.org.flat_rent.entity.Apartment;
+import com.javaacademy.org.flat_rent.exception.ApartmentNotFoundException;
 import com.javaacademy.org.flat_rent.repository.ApartmentRepository;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -16,17 +17,16 @@ public abstract class AdvertMapper {
     @Autowired
     private ApartmentRepository apartmentRepository;
 
-    @Mapping(target = "apartmentDto", source = "apartment")
-    public abstract AdvertResponseDto toResponseDto(Advert advert);
-
-    public abstract Advert toEntity(AdvertDto advertDto);
-
-    @
-            Mapping(target = "apartment", source = "apartmentId", qualifiedByName = "getApartment")
+    @Mapping(target = "apartment", source = "apartmentId", qualifiedByName = "getApartment")
+    @Mapping(target = "bookingList", ignore = true)
     public abstract Advert toEntityWithRelation(AdvertDto advertDto);
+
+    @Mapping(target = "apartmentDto", source = "apartment")
+    public abstract AdvertDtoRs toDtoRs(Advert advert);
 
     @Named("getApartment")
     protected Apartment getApartment(Integer apartmentId) {
-        return apartmentRepository.findById(apartmentId).orElseThrow();
+        return apartmentRepository.findById(apartmentId).
+                orElseThrow(() -> new ApartmentNotFoundException("не найдено помещение с id = " + apartmentId));
     }
 }

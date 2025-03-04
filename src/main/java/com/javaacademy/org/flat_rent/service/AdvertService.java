@@ -1,7 +1,7 @@
 package com.javaacademy.org.flat_rent.service;
 
 import com.javaacademy.org.flat_rent.dto.AdvertDto;
-import com.javaacademy.org.flat_rent.dto.AdvertResponseDto;
+import com.javaacademy.org.flat_rent.dto.AdvertDtoRs;
 import com.javaacademy.org.flat_rent.entity.Advert;
 import com.javaacademy.org.flat_rent.mapper.AdvertMapper;
 import com.javaacademy.org.flat_rent.repository.AdvertRepository;
@@ -18,11 +18,8 @@ public class AdvertService {
     private final AdvertRepository advertRepository;
 
     @Transactional
-    public AdvertResponseDto saveAdvert(AdvertDto advertDto) {
-        if (!apartmentRepository.existsById(advertDto.getApartmentId())) {
-            throw new RuntimeException("Ошибка в id помещения");
-        }
+    public AdvertDtoRs save(AdvertDto advertDto) {
         Advert advert = advertRepository.save(advertMapper.toEntityWithRelation(advertDto));
-        return advertMapper.toResponseDto(advert);
-    };
+        return advertMapper.toDtoRs(advert);
+    }
 }
