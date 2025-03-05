@@ -25,19 +25,19 @@ public abstract class BookingMapper {
     @Mapping(target = "advertDtoRs", source = "advert")
     public abstract BookingDtoRs toDtoRs(Booking booking);
 
-    @Mapping(target = "client", source = "clientId", qualifiedByName = "getClient")
-    @Mapping(target = "advert", source = "advertId", qualifiedByName = "getAdvert")
+    @Mapping(target = "client", source = "clientId", qualifiedByName = "getClientById")
+    @Mapping(target = "advert", source = "advertId", qualifiedByName = "getAdvertById")
     @Mapping(target = "amount", ignore = true)
     public abstract Booking toEntityWithRelation(BookingDto bookingDto);
 
-    @Named("getClient")
-    protected Client getClient(Integer id) {
+    @Named("getClientById")
+    protected Client getClientById(Integer id) {
         return clientRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("не найден клиент с id = " + id));
     }
 
-    @Named("getAdvert")
-    protected Advert getAdvert(Integer id) {
+    @Named("getAdvertById")
+    protected Advert getAdvertById(Integer id) {
         return advertRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("не найдено объявление с id = " + id));
     }

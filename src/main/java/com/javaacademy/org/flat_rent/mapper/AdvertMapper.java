@@ -17,15 +17,15 @@ public abstract class AdvertMapper {
     @Autowired
     private ApartmentRepository apartmentRepository;
 
-    @Mapping(target = "apartment", source = "apartmentId", qualifiedByName = "getApartment")
+    @Mapping(target = "apartment", source = "apartmentId", qualifiedByName = "getApartmentById")
     @Mapping(target = "bookingList", ignore = true)
     public abstract Advert toEntityWithRelation(AdvertDto advertDto);
 
     @Mapping(target = "apartmentDto", source = "apartment")
     public abstract AdvertDtoRs toDtoRs(Advert advert);
 
-    @Named("getApartment")
-    protected Apartment getApartment(Integer apartmentId) {
+    @Named("getApartmentById")
+    protected Apartment getApartmentById(Integer apartmentId) {
         return apartmentRepository.findById(apartmentId).
                 orElseThrow(() -> new EntityNotFoundException("не найдено помещение с id = " + apartmentId));
     }
