@@ -16,7 +16,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import org.apache.commons.lang3.builder.ToStringExclude;
 
 import java.util.List;
 
@@ -47,7 +46,7 @@ public class Apartment {
     @Column(name = "type", nullable = false)
     private ApartmentType apartmentType;
 
-    @ToStringExclude
+    @ToString.Exclude
     @OneToMany(mappedBy = "apartment", fetch = FetchType.EAGER)
     private List<Advert> advertList;
 }
