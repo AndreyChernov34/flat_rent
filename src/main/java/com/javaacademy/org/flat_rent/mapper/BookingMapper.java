@@ -5,8 +5,7 @@ import com.javaacademy.org.flat_rent.dto.BookingDtoRs;
 import com.javaacademy.org.flat_rent.entity.Advert;
 import com.javaacademy.org.flat_rent.entity.Booking;
 import com.javaacademy.org.flat_rent.entity.Client;
-import com.javaacademy.org.flat_rent.exception.AdvertNotFoundException;
-import com.javaacademy.org.flat_rent.exception.ClientNotFoundException;
+import com.javaacademy.org.flat_rent.exception.EntityNotFoundException;
 import com.javaacademy.org.flat_rent.repository.AdvertRepository;
 import com.javaacademy.org.flat_rent.repository.ClientRepository;
 import org.mapstruct.Mapper;
@@ -34,12 +33,12 @@ public abstract class BookingMapper {
     @Named("getClient")
     protected Client getClient(Integer id) {
         return clientRepository.findById(id)
-                .orElseThrow(() -> new ClientNotFoundException("не найден клиент с id = " + id));
+                .orElseThrow(() -> new EntityNotFoundException("не найден клиент с id = " + id));
     }
 
     @Named("getAdvert")
     protected Advert getAdvert(Integer id) {
         return advertRepository.findById(id)
-                .orElseThrow(() -> new AdvertNotFoundException("не найдено объявление с id = " + id));
+                .orElseThrow(() -> new EntityNotFoundException("не найдено объявление с id = " + id));
     }
 }

@@ -9,7 +9,6 @@ import com.javaacademy.org.flat_rent.repository.BookingRepository;
 import com.javaacademy.org.flat_rent.repository.ClientRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.time.temporal.ChronoUnit;
@@ -22,7 +21,6 @@ public class BookingService {
     private final AdvertRepository advertRepository;
     private final ClientRepository clientRepository;
 
-    @Transactional
     public BookingDtoRs save(BookingDto bookingDto) {
 
         Booking booking = bookingMapper.toEntityWithRelation(bookingDto);
