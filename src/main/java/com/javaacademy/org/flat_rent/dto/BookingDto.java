@@ -7,6 +7,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data
@@ -17,12 +18,10 @@ public class BookingDto {
     private Integer id;
 
     @JsonProperty("date_start")
-    @JsonFormat(pattern = "YYYY-MM-DD")
-    private LocalDateTime startDate;
+    private LocalDate startDate;
 
     @JsonProperty("date_finish")
-    @JsonFormat(pattern = "YYYY-MM-DD")
-    private LocalDateTime endDate;
+    private LocalDate endDate;
 
     @JsonProperty("client_id")
     private Integer clientId;
