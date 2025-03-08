@@ -1,5 +1,6 @@
 package com.javaacademy.org.flat_rent.entity;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -28,6 +29,7 @@ import java.util.List;
 @Setter
 @ToString
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@Schema(description = "Сущность Объявление")
 public class Advert {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
