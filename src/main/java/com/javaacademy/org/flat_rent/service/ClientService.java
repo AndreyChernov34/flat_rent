@@ -15,4 +15,12 @@ public class ClientService {
     public ClientDto save(ClientDto clientDto) {
         return clientMapper.toDto(clientRepository.save(clientMapper.toEntity(clientDto)));
     }
+
+    public Boolean existsById(Integer id) {
+        return clientRepository.existsById(id);
+    }
+
+    public void deleteById(Integer id) {
+        clientRepository.deleteById(id);
+    }
 }

@@ -12,6 +12,8 @@ import org.mapstruct.MappingConstants;
 import org.mapstruct.Named;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.List;
+
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING, uses = ApartmentMapper.class)
 public abstract class AdvertMapper {
     @Autowired
@@ -23,6 +25,9 @@ public abstract class AdvertMapper {
 
     @Mapping(target = "apartmentDto", source = "apartment")
     public abstract AdvertDtoRs toDtoRs(Advert advert);
+
+    @Mapping(target = "apartmentDto", source = "apartment")
+    public abstract List<AdvertDtoRs> toListDtoRs(List<Advert> adverts);
 
     @Named("getApartmentById")
     protected Apartment getApartmentById(Integer apartmentId) {

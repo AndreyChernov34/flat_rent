@@ -1,5 +1,6 @@
 package com.javaacademy.org.flat_rent.entity;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -26,6 +27,7 @@ import java.util.List;
 @Getter
 @Setter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@Schema(description = "Сущность Клиент")
 public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

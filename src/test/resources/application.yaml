@@ -1,6 +1,8 @@
 spring:
+  liquibase:
+    change-log: classpath:db.changelog/db.changelog-test.yaml
   datasource:
-    url: jdbc:postgresql://localhost:5432/flat_rent
+    url: jdbc:postgresql://localhost:5432/flat_rent?currentSchema=test
     username: postgres
     password: 12345
     driver: org.postgresql.Driver

@@ -1,10 +1,12 @@
 package com.javaacademy.org.flat_rent.entity;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Getter
+@Schema(description = "Вид помещения")
 public enum ApartmentType {
     ONLY_ROOM("комната"),
     ONE_ROOM_FLAT("однокомнатная квартира"),
