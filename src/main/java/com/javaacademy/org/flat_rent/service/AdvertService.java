@@ -15,7 +15,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class AdvertService {
-    private final static Integer PAGE_LIMIT = 10;
+    private static final Integer PAGE_LIMIT = 10;
     private final AdvertMapper advertMapper;
     private final AdvertRepository advertRepository;
 

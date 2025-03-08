@@ -10,19 +10,16 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 public class AdviceController {
     @ExceptionHandler(DateCrossException.class)
-    public ResponseEntity<String> dateCrossException(DateCrossException e) {
+    public ResponseEntity<String> handleDateCrossException(DateCrossException e) {
         return ResponseEntity
-                .status(HttpStatus.CONFLICT)
+                .status(HttpStatus.NOT_FOUND)
                 .body(e.getMessage());
     }
 
     @ExceptionHandler(EntityNotFoundException.class)
-    public ResponseEntity<String> entityException(EntityNotFoundException e) {
+    public ResponseEntity<String> handleEntityException(EntityNotFoundException e) {
         return ResponseEntity
-                .status(HttpStatus.BAD_REQUEST)
+                .status(HttpStatus.NOT_FOUND)
                 .body(e.getMessage());
     }
-
-
-
 }

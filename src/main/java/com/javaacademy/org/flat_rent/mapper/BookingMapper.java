@@ -4,7 +4,6 @@ import com.javaacademy.org.flat_rent.dto.BookingDto;
 import com.javaacademy.org.flat_rent.dto.BookingDtoRs;
 import com.javaacademy.org.flat_rent.entity.Advert;
 import com.javaacademy.org.flat_rent.entity.Booking;
-import com.javaacademy.org.flat_rent.entity.Client;
 import com.javaacademy.org.flat_rent.exception.EntityNotFoundException;
 import com.javaacademy.org.flat_rent.repository.AdvertRepository;
 import com.javaacademy.org.flat_rent.repository.ClientRepository;

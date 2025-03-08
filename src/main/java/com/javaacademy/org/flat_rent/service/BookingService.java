@@ -22,7 +22,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class BookingService {
-    private final static Integer PAGE_LIMIT = 20;
+    private static final Integer PAGE_LIMIT = 20;
     private final BookingMapper bookingMapper;
     private final BookingRepository bookingRepository;
     private final ClientService clientService;
@@ -30,9 +30,6 @@ public class BookingService {
 
     @Transactional
     public BookingDtoRs save(BookingDto bookingDto) {
-        System.out.println(bookingDto.getClientDto().toString());
-
-
         if (bookingDto.getClientDto().getId() == null) {
             ClientDto clientDto = clientService.save(ClientDto.builder()
                     .email(bookingDto.getClientDto().getEmail())

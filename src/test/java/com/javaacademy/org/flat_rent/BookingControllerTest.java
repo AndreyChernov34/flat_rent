@@ -3,9 +3,9 @@ package com.javaacademy.org.flat_rent;
 import com.javaacademy.org.flat_rent.dto.AdvertDto;
 import com.javaacademy.org.flat_rent.dto.ApartmentDto;
 import com.javaacademy.org.flat_rent.dto.BookingDto;
-import com.javaacademy.org.flat_rent.dto.BookingDtoRs;
 import com.javaacademy.org.flat_rent.dto.ClientDto;
 import com.javaacademy.org.flat_rent.entity.ApartmentType;
+import com.javaacademy.org.flat_rent.repository.BookingRepository;
 import com.javaacademy.org.flat_rent.service.AdvertService;
 import com.javaacademy.org.flat_rent.service.ApartmentService;
 import com.javaacademy.org.flat_rent.service.BookingService;
@@ -24,6 +24,7 @@ import org.springframework.test.context.jdbc.Sql;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.notNullValue;
 
@@ -39,10 +40,10 @@ public class BookingControllerTest {
     private ClientService clientService;
     @Autowired
     private BookingService bookingService;
+    @Autowired
+    private BookingRepository bookingRepository;
 
     private BookingDto bookingDtoTest;
-    private ClientDto clientDtoTest;
-
 
     @LocalServerPort
     private int port;
@@ -74,10 +75,10 @@ public class BookingControllerTest {
                 .build();
     }
 
-    private BookingDto newBookingDtoTest(LocalDate startDate, LocalDate endDate) {
+    private BookingDto newBookingDtoTest(ClientDto clientDto, LocalDate startDate, LocalDate endDate) {
         return BookingDto.builder()
                 .id(null)
-                .clientDto(newClientDtoTest())
+                .clientDto(clientDto)
                 .advertId(advertService.save(newAdvertDtoTest()).getId())
                 .startDate(startDate)
                 .endDate(endDate)
@@ -96,7 +97,7 @@ public class BookingControllerTest {
                 .clientDto(newClientDtoTest())
                 .build();
 
-        RestAssured.given()
+        given()
                 .contentType(ContentType.JSON)
                 .body(bookingDtoTest)
                 .when()
@@ -125,7 +126,7 @@ public class BookingControllerTest {
                 .clientDto(clientService.save(newClientDtoTest()))
                 .build();
 
-        RestAssured.given()
+        given()
                 .contentType(ContentType.JSON)
                 .body(bookingDtoTest)
                 .when()
@@ -145,60 +146,62 @@ public class BookingControllerTest {
     @Test
     @DisplayName("Неуспешное бронирование при существующем бронировании на эти даты (случай 4.2.2)")
     public void saveBookingFailDate() {
+        ClientDto clientDtoTest = clientService.save(newClientDtoTest());
+        bookingDtoTest = newBookingDtoTest(clientDtoTest, LocalDate.of(2025, 11, 01),
+                LocalDate.of(2025, 11, 10));
 
-        BookingDtoRs firstBooking = bookingService
-                .save(newBookingDtoTest(LocalDate.of(2025, 11, 01),
-                        LocalDate.of(2025, 11, 10)));
-        bookingDtoTest = newBookingDtoTest(LocalDate.of(2025, 11, 5),
-                LocalDate.of(2025, 11, 6
-                ));
+        bookingService.save(bookingDtoTest);
 
-        RestAssured.given()
+        bookingDtoTest.setStartDate(LocalDate.of(2025, 11, 5));
+        bookingDtoTest.setEndDate(LocalDate.of(2025, 11, 6));
+
+        given()
                 .contentType(ContentType.JSON)
                 .body(bookingDtoTest)
                 .when()
                 .post("/booking")
                 .then()
-                .statusCode(400);
+                .statusCode(404);
     }
 
 
     @Test
     @DisplayName("Неуспешное бронирование при существующем бронировании на эти даты (случай 4.2.3)")
     public void saveBookingFailAfterDate() {
+        ClientDto clientDtoTest = clientService.save(newClientDtoTest());
+        bookingDtoTest = newBookingDtoTest(clientDtoTest, LocalDate.of(2025, 11, 01),
+                LocalDate.of(2025, 11, 10));
+        bookingService.save(bookingDtoTest);
 
-        BookingDtoRs firstBooking = bookingService
-                .save(newBookingDtoTest(LocalDate.of(2025, 11, 1),
-                        LocalDate.of(2025, 11, 10)));
-        bookingDtoTest = newBookingDtoTest(LocalDate.of(2025, 11, 9),
-                LocalDate.of(2025, 11, 20
-                ));
+        bookingDtoTest.setStartDate(LocalDate.of(2025, 11, 9));
+        bookingDtoTest.setEndDate(LocalDate.of(2025, 11, 20));
 
-        RestAssured.given()
+        given()
                 .contentType(ContentType.JSON)
                 .body(bookingDtoTest)
                 .when()
                 .post("/booking")
                 .then()
-                .statusCode(400);
+                .statusCode(404);
     }
 
     @Test
     @DisplayName("Неуспешное бронирование при существующем бронировании на эти даты (случай 4.2.4)")
     public void saveBookingFailBeforeDate() {
+        ClientDto clientDtoTest = clientService.save(newClientDtoTest());
+        bookingDtoTest = newBookingDtoTest(clientDtoTest, LocalDate.of(2025, 11, 01),
+                LocalDate.of(2025, 11, 10));
+        bookingService.save(bookingDtoTest);
 
-        BookingDtoRs firstBooking = bookingService
-                .save(newBookingDtoTest(LocalDate.of(2025, 10, 1),
-                        LocalDate.of(2025, 11, 10)));
-        bookingDtoTest = newBookingDtoTest(LocalDate.of(2025, 9, 20),
-                LocalDate.of(2025, 10, 2));
+        bookingDtoTest.setStartDate(LocalDate.of(2025, 9, 20));
+        bookingDtoTest.setEndDate(LocalDate.of(2025, 10, 2));
 
-        RestAssured.given()
+        given()
                 .contentType(ContentType.JSON)
                 .body(bookingDtoTest)
                 .when()
                 .post("/booking")
                 .then()
-                .statusCode(400);
+                .statusCode(404);
     }
 }

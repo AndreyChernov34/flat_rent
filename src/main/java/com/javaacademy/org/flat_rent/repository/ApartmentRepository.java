@@ -1,8 +1,6 @@
 package com.javaacademy.org.flat_rent.repository;
 
-import com.javaacademy.org.flat_rent.entity.Advert;
 import com.javaacademy.org.flat_rent.entity.Apartment;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
